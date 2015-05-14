@@ -1,0 +1,21 @@
+{
+  "name": "image_upload",
+  "version": "0.0.0",
+  "authors": [
+    "alex <dolgiyspb@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery-file-upload": "~9.9.3",
+    "bootstrap": "~3.3.4",
+    "blueimp-gallery": "~2.15.2",
+    "blueimp-file-upload": "~9.9.3"
+  }
+}

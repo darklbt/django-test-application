@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="{{ STATIC_URL }}bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}jquery-file-upload/css/jquery.fileupload.css">
+    <title>jQuery File Upload Example</title>
+</head>
+<body>
+<div class="container">
+    <table class="table" id="files-to-upload">
+
+    </table>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <form id="fileupload" method="post" action="." enctype="multipart/form-data">{% csrf_token %}
+                <div class="row fileupload-buttonbar">
+
+                        <!-- The fileinput-button span is used to style the file input field as button -->
+                <span class="btn btn-success fileinput-button">
+                    <i class="glyphicon glyphicon-plus"></i>
+                    <span>Add files...</span>
+                    <input type="file" name="image" multiple>
+                </span>
+                        <button type="submit" class="btn btn-primary start">
+                            <i class="glyphicon glyphicon-upload"></i>
+                            <span>Start upload</span>
+                        </button>
+                        <button type="reset" class="btn btn-warning cancel">
+                            <i class="glyphicon glyphicon-ban-circle"></i>
+                            <span>Cancel upload</span>
+                        </button>
+                        <button type="button" class="btn btn-danger delete">
+                            <i class="glyphicon glyphicon-trash"></i>
+                            <span>Delete</span>
+                        </button>
+                    <!-- The global progress information -->
+
+                </div>
+                <!-- The table listing the files available for upload/download -->
+                <table role="presentation" class="table table-striped">
+                    <tbody class="files"></tbody>
+                </table>
+            </form>
+        </div>
+    </div>
+</div>
+<!---<script src="{{ STATIC_URL }}blueimp-load-image/js/load-image.all.min.js"></script>
+<script src="{{ STATIC_URL }}blueimp-canvas-to-blob/js/canvas-to-blob.min.js"></script>
+<script src="{{ STATIC_URL }}blueimp-tmpl/js/tmpl.min.js"></script>
+<script src="{{ STATIC_URL }}blueimp-gallery/js/blueimp-gallery.min.js"></script>
+--->
+
+
+
+<script src="{{ STATIC_URL }}jquery/dist/jquery.js"></script>
+
+<script src="{{ STATIC_URL }}jquery-file-upload/js/vendor/jquery.ui.widget.js"></script>
+<!-- The Templates plugin is included to render the upload/download listings -->
+
+<!-- The Load Image plugin is included for the preview images and image resizing functionality -->
+<script src="{{ STATIC_URL }}blueimp-load-image/js/load-image.all.min.js"></script>
+<!-- The Canvas to Blob plugin is included for image resizing functionality -->
+<script src="{{ STATIC_URL }}blueimp-canvas-to-blob/js/canvas-to-blob.min.js"></script>
+<!-- Bootstrap JS is not required, but included for the responsive demo navigation -->
+<script src="{{ STATIC_URL }}bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- blueimp Gallery script -->
+<script src="{{ STATIC_URL }}blueimp-gallery/js/blueimp-gallery.min.js"></script>
+<!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
+
+
+<script src="{{ STATIC_URL }}jquery-file-upload/js/jquery.iframe-transport.js"></script>
+<script src="{{ STATIC_URL }}jquery-file-upload/js/jquery.fileupload.js"></script>
+<script src="{{ STATIC_URL }}jquery-file-upload/js/jquery.fileupload-ui.js"></script>
+<script src="{{ STATIC_URL }}jquery-file-upload/js/jquery.fileupload-process.js"></script>
+<script src="{{ STATIC_URL }}jquery-file-upload/js/jquery.fileupload-image.js"></script>
+
+
+<script src="{{ STATIC_URL }}js/upload.js"></script>
+
+</body>
+</html>
