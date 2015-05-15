@@ -16,6 +16,7 @@
     "jquery-file-upload": "~9.9.3",
     "bootstrap": "~3.3.4",
     "blueimp-gallery": "~2.15.2",
-    "blueimp-file-upload": "~9.9.3"
+    "blueimp-file-upload": "~9.9.3",
+    "jquery-cookie": "~1.4.1"
   }
 }

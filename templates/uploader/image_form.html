@@ -9,6 +9,20 @@
 <body>
 <div class="container">
     <table class="table" id="files-to-upload">
+    <tr>
+        <th>
+            Изображение
+        </th>
+        <th>
+            Имя файла
+        </th>
+        <th>
+            Размер файла
+        </th>
+        <th>
+            Имя для сохранения
+        </th>
+    </tr>
 
     </table>
     <div class="row">
@@ -16,24 +30,24 @@
             <form id="fileupload" method="post" action="." enctype="multipart/form-data">{% csrf_token %}
                 <div class="row fileupload-buttonbar">
 
-                        <!-- The fileinput-button span is used to style the file input field as button -->
+                    <!-- The fileinput-button span is used to style the file input field as button -->
                 <span class="btn btn-success fileinput-button">
                     <i class="glyphicon glyphicon-plus"></i>
                     <span>Add files...</span>
                     <input type="file" name="image" multiple>
                 </span>
-                        <button type="submit" class="btn btn-primary start">
-                            <i class="glyphicon glyphicon-upload"></i>
-                            <span>Start upload</span>
-                        </button>
-                        <button type="reset" class="btn btn-warning cancel">
-                            <i class="glyphicon glyphicon-ban-circle"></i>
-                            <span>Cancel upload</span>
-                        </button>
-                        <button type="button" class="btn btn-danger delete">
-                            <i class="glyphicon glyphicon-trash"></i>
-                            <span>Delete</span>
-                        </button>
+                    <button type="submit" class="btn btn-primary start">
+                        <i class="glyphicon glyphicon-upload"></i>
+                        <span>Start upload</span>
+                    </button>
+                    <button type="reset" class="btn btn-warning cancel">
+                        <i class="glyphicon glyphicon-ban-circle"></i>
+                        <span>Cancel upload</span>
+                    </button>
+                    <button type="button" class="btn btn-danger delete">
+                        <i class="glyphicon glyphicon-trash"></i>
+                        <span>Delete</span>
+                    </button>
                     <!-- The global progress information -->
 
                 </div>
@@ -44,6 +58,35 @@
             </form>
         </div>
     </div>
+    <h1>Загруженные файлы</h1>
+    <table class="table">
+        {% for image in images %}
+            <tr class="image-view" >
+                <td>
+                    {{ MEDIA_URL }}{{ image.image }}
+                </td>
+                <td>
+                    {{ image.upload_date }}
+                </td>
+
+                <td>
+                    {{ image.exif.creation_date }}
+                </td>
+                <td>
+                    {{ image.exif.camera_vendor }}
+                </td>
+                <td>
+                    {{ image.exif.camera_model }}
+                </td>
+
+                <td>
+                    <button type="button" class="btn btn-danger delete" data-url="{% url 'upload_delete' image.pk %}">
+                        <i class="glyphicon glyphicon-trash"></i>
+                    </button>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
 </div>
 <!---<script src="{{ STATIC_URL }}blueimp-load-image/js/load-image.all.min.js"></script>
 <script src="{{ STATIC_URL }}blueimp-canvas-to-blob/js/canvas-to-blob.min.js"></script>
@@ -52,8 +95,8 @@
 --->
 
 
-
 <script src="{{ STATIC_URL }}jquery/dist/jquery.js"></script>
+<script src="{{ STATIC_URL }}jquery-cookie/jquery.cookie.js"></script>
 
 <script src="{{ STATIC_URL }}jquery-file-upload/js/vendor/jquery.ui.widget.js"></script>
 <!-- The Templates plugin is included to render the upload/download listings -->

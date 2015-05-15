@@ -24,3 +24,8 @@ urlpatterns = [
     url(r'^$', lambda x: HttpResponseRedirect('/upload/new/')),
     url(r'^upload/', include('uploader.urls'))
 ]
+
+from os.path import dirname, abspath, join
+urlpatterns += (
+    url(r'^media/(.*)$', 'django.views.static.serve', {'document_root': join(abspath(dirname(dirname(__file__))), 'media')}),
+)
