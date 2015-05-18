@@ -86,6 +86,7 @@ DATABASES = {
 import dj_database_url
 import os
 if os.getenv('HOST_TYPE'):
+
     DATABASES['default'] =  dj_database_url.config()
 
 
