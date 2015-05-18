@@ -2,20 +2,8 @@ __author__ = 'alex'
 from django.http import HttpResponse
 import json
 
-MIMEANY = '*/*'
+
 MIMEJSON = 'application/json'
-MIMETEXT = 'text/plain'
-
-
-def response_mimetype(request):
-    """response_mimetype -- Return a proper response mimetype, accordingly to
-    what the client accepts, as available in the `HTTP_ACCEPT` header.
-    request -- a HttpRequest instance.
-    """
-    can_json = MIMEJSON in request.META['HTTP_ACCEPT']
-    can_json |= MIMEANY in request.META['HTTP_ACCEPT']
-    return MIMEJSON if can_json else MIMETEXT
-
 
 class JSONResponse(HttpResponse):
     """JSONResponse -- Extends HTTPResponse to handle JSON format response.
