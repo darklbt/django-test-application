@@ -20,7 +20,7 @@ if [ -f bin/install_nodejs ]; then
 fi
 
 # PUT ANY POST-BUILD STUFF HERE (like database migrations)
-#python app/manage.py syncdb --noinput
-#python app/manage.py migrate --noinput
+python image_upload/manage.py syncdb --noinput
+python image_upload/manage.py migrate --noinput
 
 echo "-----> Post-compile done"
