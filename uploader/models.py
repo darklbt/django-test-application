@@ -1,3 +1,4 @@
+# coding=utf-8
 from datetime import datetime, date
 from hashlib import sha256
 import os

@@ -1,3 +1,4 @@
+# coding=utf-8
 from django.shortcuts import render, render_to_response, RequestContext, HttpResponse
 from django.views.generic import CreateView, DeleteView, ListView
 from django import forms
