@@ -3,7 +3,7 @@ set -veo pipefail
 
 # PUT ANY POST-BUILD STUFF HERE (like database migrations)
 
-
+python manage.py flush --noinput
 python manage.py migrate --noinput
 ls -al node_modules/bower/bin
 node_modules/bower/bin/bower install
