@@ -7,6 +7,35 @@
     <title>Upload photo example</title>
 </head>
 <body>
+<div class="jumbotron">
+    <div class="container">
+        <h1>
+            Веб-приложение для загрузки фотографий.
+        </h1>
+        <p>
+            Воспользуйтесь кнопкой "Добавить файлы" или просто перетащите их drag'n'drop'ом.
+            Для начала загрузки файла нажмите кнопку загрузки.
+            Загруженные файлы отображаются в таблице снизу.
+        </p>
+        <p>
+            Реализованные ограничения:
+            <ul>
+        <li>
+            Не загружаются фотографии без EXIF-данных
+        </li>
+        <li>
+            Не загружаются фотографии без даты создания в EXIF или сделанные больше года назад.
+        </li>
+        <li>
+            Невозможно загрузить одинаковые фотографии.
+        </li>
+        <li>
+            Загружаются только файлы, являющиеся изображениями.
+        </li>
+    </ul>
+        </p>
+    </div>
+</div>
 <div class="container">
     <table class="table" id="files-to-upload">
         <thead>
@@ -36,7 +65,7 @@
                     <div class="col-md-2 col-md-offset-5">
                 <span class="btn btn-success fileinput-button">
                     <i class="glyphicon glyphicon-plus"></i>
-                    <span>Add files...</span>
+                    <span>Добавить файлы...</span>
                     <input type="file" name="image" multiple>
                 </span>
                         </div>

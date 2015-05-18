@@ -37,6 +37,12 @@ $(function () {
         }
 
     });
+    function removeTr(tr) {
+        tr.fadeOut("slow", function () {
+            $(this).remove();
+        });
+    }
+
     renderPreviewTable = function (data, form) {
         var that = this
             , tr = $("<tr>")
@@ -58,20 +64,23 @@ $(function () {
                                 .find("i")
                                 .removeClass("glyphicon-hourglass")
                                 .addClass("glyphicon-ok");
-                            tr.fadeOut("slow", function () {
-                                $(this).remove();
-                            });
+                            removeTr(tr);
                         })
                         .error(function (jqXHR, textStatus, errorThrown) {
                             var isRequestError = jqXHR.status == 400
-                                , message = $('<div class="alert alert-danger" role="alert">'
+                                , dismissButton = $('<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>')
+                                , message = $('<div class="alert alert-danger alert-dismissible" role="alert">'
                                 + '<strong>'
                                 + (isRequestError ? "Request error! " : "Unknown error!")
                                 + '</strong>'
                                 + (isRequestError ? jqXHR.responseJSON["__all__"][0] : "")
-                                + '</div>');
+                                + '</div>')
+                                    .append(dismissButton);
                             tr.find("button").remove();
                             tr.last("td").append(message);
+                            dismissButton.on("click", function() {
+                                removeTr(tr);
+                            })
                         });
                 })
             , slugField = $("<input type='text' class='form-control filename'/>").val(file.name);
@@ -101,5 +110,6 @@ $(function () {
     function csrfSafeMethod(method) {
         return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
     }
+
 
 });
