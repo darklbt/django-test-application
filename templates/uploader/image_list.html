@@ -1,0 +1,61 @@
+{% load uploader_tags %}
+{% for image in images %}
+    <thead>
+    <tr>
+    <th>
+        Имя
+    </th>
+    <th>
+        Миниатюра
+    </th>
+    <th>
+        Размер
+    </th>
+    <th>
+        Дата загрузки
+    </th>
+    <th>
+        Дата создания
+    </th>
+    <th>
+        Производитель камеры
+    </th>
+    <th>
+        Модель камеры
+    </th>
+    <th></th>
+    </tr>
+    </thead>
+    <tr>
+
+    <td>
+        {{ image.image.file.name|basename }}
+    </td>
+        <td>
+            <a href="{{ MEDIA_URL }}{{ image.image }}">
+                <img src="{{ MEDIA_URL }}{{ image.thumbnail }}"/>
+            </a>
+        </td>
+        <td>
+            {{ image.image.size|filesizeformat }}
+        </td>
+        <td>
+            {{ image.upload_date }}
+        </td>
+        <td>
+            {{ image.exif.creation_date }}
+        </td>
+        <td>
+            {{ image.exif.camera_vendor|default_if_none:"Not defined" }}
+        </td>
+        <td>
+            {{ image.exif.camera_model|default_if_none:"Not defined" }}
+        </td>
+
+        <td>
+            <button type="button" class="btn btn-danger delete" data-url="{% url 'upload_delete' image.pk %}">
+                <i class="glyphicon glyphicon-trash"></i>
+            </button>
+        </td>
+    </tr>
+{% endfor %}

@@ -1,15 +1,17 @@
 from django.shortcuts import render, render_to_response, RequestContext, HttpResponse
-from django.views.generic import CreateView, DeleteView
+from django.views.generic import CreateView, DeleteView, ListView
+from django import forms
 from django.forms import ModelForm
 from django.forms import TextInput
+from django.utils.translation import ugettext as _
 import json
+
 from models import Image
 from utils import JSONResponse
 
 # Create your views here.
 
 class ImageForm(ModelForm):
-    name = TextInput()
     class Meta:
         model = Image
         fields = ["image"]
@@ -18,7 +20,11 @@ class ImageForm(ModelForm):
         cleaned_data = super(ImageForm, self).clean()
         name = self.data.get("name")
         image = cleaned_data.get("image")
-        image.name = name
+        if  image:
+            image.name = name
+        return cleaned_data
+
+
 
 
 
@@ -35,8 +41,6 @@ class ImageCreateView(CreateView):
 
     def form_valid(self, form):
         self.object = form.save()
-        # files = [self.object]
-        # data = {'files': files}
         response = JSONResponse({"success" : True}, mimetype='application/json')
         response['Content-Disposition'] = 'inline; filename=files.json'
         return response
@@ -56,3 +60,11 @@ class ImageDeleteView(DeleteView):
         response = JSONResponse(True, mimetype='application/json')
         response['Content-Disposition'] = 'inline; filename=files.json'
         return response
+
+class ImageListView(ListView):
+    model = Image
+
+    def get(self, request, *args, **kwargs):
+        context = RequestContext(request)
+        context.push({"images" : self.get_queryset() })
+        return render_to_response("uploader/image_list.html", context_instance=context)

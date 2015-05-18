@@ -4,25 +4,27 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="{{ STATIC_URL }}bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="{{ STATIC_URL }}jquery-file-upload/css/jquery.fileupload.css">
-    <title>jQuery File Upload Example</title>
+    <title>Upload photo example</title>
 </head>
 <body>
 <div class="container">
     <table class="table" id="files-to-upload">
-    <tr>
-        <th>
-            Изображение
-        </th>
-        <th>
-            Имя файла
-        </th>
-        <th>
-            Размер файла
-        </th>
-        <th>
-            Имя для сохранения
-        </th>
-    </tr>
+        <thead>
+        <tr>
+            <th>
+                Изображение
+            </th>
+            <th>
+                Имя файла
+            </th>
+            <th>
+                Размер файла
+            </th>
+            <th>
+                Имя для сохранения
+            </th>
+        </tr>
+        </thead>
 
     </table>
     <div class="row">
@@ -31,27 +33,14 @@
                 <div class="row fileupload-buttonbar">
 
                     <!-- The fileinput-button span is used to style the file input field as button -->
+                    <div class="col-md-2 col-md-offset-5">
                 <span class="btn btn-success fileinput-button">
                     <i class="glyphicon glyphicon-plus"></i>
                     <span>Add files...</span>
                     <input type="file" name="image" multiple>
                 </span>
-                    <button type="submit" class="btn btn-primary start">
-                        <i class="glyphicon glyphicon-upload"></i>
-                        <span>Start upload</span>
-                    </button>
-                    <button type="reset" class="btn btn-warning cancel">
-                        <i class="glyphicon glyphicon-ban-circle"></i>
-                        <span>Cancel upload</span>
-                    </button>
-                    <button type="button" class="btn btn-danger delete">
-                        <i class="glyphicon glyphicon-trash"></i>
-                        <span>Delete</span>
-                    </button>
-                    <!-- The global progress information -->
-
+                        </div>
                 </div>
-                <!-- The table listing the files available for upload/download -->
                 <table role="presentation" class="table table-striped">
                     <tbody class="files"></tbody>
                 </table>
@@ -59,33 +48,8 @@
         </div>
     </div>
     <h1>Загруженные файлы</h1>
-    <table class="table">
-        {% for image in images %}
-            <tr class="image-view" >
-                <td>
-                    {{ MEDIA_URL }}{{ image.image }}
-                </td>
-                <td>
-                    {{ image.upload_date }}
-                </td>
-
-                <td>
-                    {{ image.exif.creation_date }}
-                </td>
-                <td>
-                    {{ image.exif.camera_vendor }}
-                </td>
-                <td>
-                    {{ image.exif.camera_model }}
-                </td>
-
-                <td>
-                    <button type="button" class="btn btn-danger delete" data-url="{% url 'upload_delete' image.pk %}">
-                        <i class="glyphicon glyphicon-trash"></i>
-                    </button>
-                </td>
-            </tr>
-        {% endfor %}
+    <table class="table image-list-table">
+        {% include 'uploader/image_list.html' %}
     </table>
 </div>
 <!---<script src="{{ STATIC_URL }}blueimp-load-image/js/load-image.all.min.js"></script>
