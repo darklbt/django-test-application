@@ -62,5 +62,6 @@ target/
 bower_components/
 media/
 .idea/
+/node_modules/
 
 *.sqlite3

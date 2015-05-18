@@ -2,11 +2,11 @@
 set -veo pipefail
 
 # PUT ANY POST-BUILD STUFF HERE (like database migrations)
-echo `ls`
+
 python manage.py syncdb --noinput
 python manage.py migrate --noinput
 
-bower install
+node_modules/bin/bower install
 python manage.py collectstatic --noinput
 
 echo "-----> Post-compile done"
