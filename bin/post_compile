@@ -5,8 +5,8 @@ set -veo pipefail
 
 
 python manage.py migrate --noinput
-ls -al node_modules/bower
-node_modules/bin/bower install
+ls -al node_modules/bower/bin
+node_modules/bower/bin/bower install
 python manage.py collectstatic --noinput
 
 echo "-----> Post-compile done"
