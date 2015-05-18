@@ -20,6 +20,7 @@ if [ -f bin/install_nodejs ]; then
 fi
 
 # PUT ANY POST-BUILD STUFF HERE (like database migrations)
+ech `ls -al`
 python photo-upload-test-task/manage.py syncdb --noinput
 python photo-upload-test-task/manage.py migrate --noinput
 
