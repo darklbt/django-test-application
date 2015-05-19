@@ -57,12 +57,12 @@ class Image(models.Model):
         """
         try:
             info = self.image.file.image._getexif()
+            ret = {}
+            for tag, value in info.items():
+                decoded = TAGS.get(tag, tag)
+                ret[decoded] = value
         except:
             raise ValidationError(_("Exif not found!"))
-        ret = {}
-        for tag, value in info.items():
-            decoded = TAGS.get(tag, tag)
-            ret[decoded] = value
         try:
             creation_date = datetime.strptime(ret['DateTimeOriginal'], "%Y:%m:%d %H:%M:%S").date()
         except:
